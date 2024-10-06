@@ -11,27 +11,27 @@ local GunMods = {
       ShotEffect = "Rocket"
 }
 
-local function  modifyToolProperties(character)
+local function modifyToolProperties(character)
        while true do
                local holdingTool. = character:FindFirstChildOfClass("Tool")
                if  holdingTool then
                       for propertyName,propertyValue in pairs(GunMods) do
                            local property = holdingTool:FindFirstChild(propertyName)
                                or (holdingTool:FindFirstChild("Configuration")
-                               and holdingTool.Configuration:FindFirstChild(propertyName))
+                               and holdingTool.Configuration:FindFirstChild(propertyName)
                      
-                             if property then
+                            if property then
                                 if property:IsA("StringValue") then
                                        property.Value = tostring(propertyValue)
                                    else
                                        property.Value = propertyValue
                                    end
-                              end
-                         end
-                    end
-                   task.wait( )
-               end
-          end
+                             end
+                       end
+                end
+                task.wait()
+         end
+end
 
 local function onCharacterAdded(character)
       modifyToolProperties(character)
